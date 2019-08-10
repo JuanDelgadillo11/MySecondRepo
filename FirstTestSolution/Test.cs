@@ -4,10 +4,18 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using PageObjectLibrary.AutomationPractice.ContactUs;
 using PageObjectLibrary.AutomationPractice.Menu;
+using PageObjectLibrary.PageObjects.AutomationPractice.Dresses;
+using PageObjectLibrary.PageObjects.AutomationPractice.LogIn;
+using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartAddress;
+using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartPayment;
+using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartShipping;
+using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartSummary;
+using PageObjectLibrary.Steps.AutomationPractice.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FirstTestSolution
@@ -18,22 +26,19 @@ namespace FirstTestSolution
     {
 
         IWebDriver webDriver;
+        NavigationSteps navigationSteps;
+        
         public Test()
         {
-            webDriver = new ChromeDriver(@"C:\SeleniumWebDrivers");
+            //moviendo al setup
+            //webDriver = new ChromeDriver(@"C:\SeleniumWebDrivers");
+            //navigationSteps = new NavigationSteps(webDriver);
         }
 
-        [TestMethod]
-        public void MyFirstTest()
+        [TestMethod, TestCategory("ContactUs Valid data")]
+        public void ContactUsFormIsSentCorrectly()
         {
-            //navigate to automation practice site
-            webDriver.Navigate().GoToUrl("http://automationpractice.com/index.php?");
-
-            MenuPage menuPage = new MenuPage(webDriver);
-            menuPage.ClickContactUs();
-
-            ContactUsPage contactUsPage = new ContactUsPage(webDriver);
-
+            ContactUsPage contactUsPage = navigationSteps.NavigateToContactUs();
             contactUsPage.FillContactUsForm(ContactUsPage.Options.ByText,"Customer service", "juan.pablo.delgadillo.peredo@gmail.com", "1234", @"C:\test.txt", "Hola, compraste esto");
 
             string actualMessage= contactUsPage.GetConfirmationMessage();
@@ -41,6 +46,62 @@ namespace FirstTestSolution
 
             Assert.AreEqual(expectedMessage, actualMessage);
 
+        }
+
+        [TestMethod]
+        public void Purchace()
+        {
+            LogInPage loginPage = navigationSteps.NavigateToLogIn();
+            loginPage.FillAccountData("juan.pablo.delgadillo.peredo@gmail.com","Control123");
+
+            DressesPage dressesPage = navigationSteps.NavigateToDresses();
+            dressesPage.AddToCart();
+
+            ShoppingCartSummaryPage shoppingCartSummaryPage =  dressesPage.ProceedToCheckOut();
+
+            string total = shoppingCartSummaryPage.GetTotal();
+
+            ShoppingCartAddressPage shoppingCartAddressPage = shoppingCartSummaryPage.ProceedToCheckOut();
+
+            ShoppingCartShippingPage shoppingCartShippingPage = shoppingCartAddressPage.ProceedToCheckOut();
+            shoppingCartShippingPage.AcceptTerms();
+
+            ShoppingCartPaymentPage shoppingCartPaymentPage = shoppingCartShippingPage.ProceedToCheckOut();
+            shoppingCartPaymentPage.PayByBank();
+            shoppingCartPaymentPage.ConfirmOrder();
+
+            string actualAmount = shoppingCartPaymentPage.GetActualAmount();
+            Assert.AreEqual(total, actualAmount);
+
+        }
+        [TestInitialize]
+
+        public void Setup()
+        {
+            webDriver = new ChromeDriver(@"C:\SeleniumWebDrivers");
+            //adding wait implicit
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            //tiempo que espera antes de que se cargue la pagna completamente
+            webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(120);
+
+            navigationSteps = new NavigationSteps(webDriver);
+            webDriver.Navigate().GoToUrl("http://automationpractice.com/index.php?");
+        }
+
+        [TestCleanup]
+        public void TearDown()
+        {
+            //webDriver.Close();//Cerrar el browser
+            //webDriver.Quit();//Cerrar los procesos
+
+        }
+
+        [TestMethod, TestCategory("ContactUs Invalida data")]
+        public void ContactUsFormIsNotSentWithInvalidData()
+        {
+            webDriver.Navigate().GoToUrl("http://automationpractice.com/index.php?");
+
+            ContactUsPage contactUsPage = navigationSteps.NavigateToContactUs();
         }
 
         [TestMethod]
