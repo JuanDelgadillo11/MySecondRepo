@@ -3,7 +3,9 @@ using PageObjectLibrary.AutomationPractice.Menu;
 using PageObjectLibrary.Base;
 using PageObjectLibrary.PageObjects.AutomationPractice.Dresses;
 using PageObjectLibrary.PageObjects.AutomationPractice.LogIn;
+using PageObjectLibrary.PageObjects.AutomationPractice.OrderHistory;
 using PageObjectLibrary.PageObjects.AutomationPractice.ProductsMenu;
+using PageObjectLibrary.PageObjects.AutomationPractice.ViewCustomerAccount;
 using PageObjectLibrary.PageObjects.AutomationPractice.Women;
 
 namespace PageObjectLibrary.Steps.AutomationPractice.Navigation
@@ -42,5 +44,20 @@ namespace PageObjectLibrary.Steps.AutomationPractice.Navigation
             WomenPage womenPage = productsMenuPage.ClickWomen();
             return womenPage;
         }
+
+        public void NavigateToViewCustomerAccount()
+        {
+            CustomerAccountPage myAccount = new CustomerAccountPage();
+            myAccount.Click();
+
+        }
+
+        public OrderHistoryPage NavigateToOrderHistory()
+        {
+            CustomerAccountPage myAccount = new CustomerAccountPage();
+            OrderHistoryPage orderHistoryPage=myAccount.ClickOrderHistoryAndDetails();
+            return orderHistoryPage;
+        }
+
     }
 }

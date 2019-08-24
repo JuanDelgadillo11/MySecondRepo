@@ -4,6 +4,7 @@ using PageObjectLibrary.Accounts;
 using PageObjectLibrary.PageObjects.AutomationPractice.ConfirmOrder;
 using PageObjectLibrary.PageObjects.AutomationPractice.Dresses;
 using PageObjectLibrary.PageObjects.AutomationPractice.LogIn;
+using PageObjectLibrary.PageObjects.AutomationPractice.OrderHistory;
 using PageObjectLibrary.PageObjects.AutomationPractice.OrderSummary;
 using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartAddress;
 using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartPayment;
@@ -58,7 +59,10 @@ namespace FirstTestSolution
             int amountToBuy = 2;
             purchaseADress.Buy(amountToBuy);
 
-            Assert.AreEqual(purchaseADress.TotalOrder, purchaseADress.TotalPaid);
+            navigationSteps.NavigateToViewCustomerAccount();
+            OrderHistoryPage order= navigationSteps.NavigateToOrderHistory();
+
+            Assert.AreEqual(purchaseADress.TotalOrder, order.GetAmount());
         }
     }
 }

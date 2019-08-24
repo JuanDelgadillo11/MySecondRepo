@@ -61,12 +61,14 @@
     <Compile Include="PageObjects\AutomationPractice\Dresses\DressesPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\LogIn\LogInPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\Menu\MenuPage.cs" />
+    <Compile Include="PageObjects\AutomationPractice\OrderHistory\OrderHistoryPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\OrderSummary\Order.cs" />
     <Compile Include="PageObjects\AutomationPractice\ProductsMenu\ProductsMenuPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartAddress\ShoppingCartAddressPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartPayment\ShoppingCartPaymentPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartShipping\ShoppingCartShippingPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartSummary\ShoppingCartSummaryPage.cs" />
+    <Compile Include="PageObjects\AutomationPractice\ViewCustomerAccount\CustomerAccountPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\Women\WomenPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
