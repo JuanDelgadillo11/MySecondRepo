@@ -4,6 +4,7 @@ using PageObjectLibrary.Base;
 using PageObjectLibrary.PageObjects.AutomationPractice.Dresses;
 using PageObjectLibrary.PageObjects.AutomationPractice.LogIn;
 using PageObjectLibrary.PageObjects.AutomationPractice.ProductsMenu;
+using PageObjectLibrary.PageObjects.AutomationPractice.Women;
 
 namespace PageObjectLibrary.Steps.AutomationPractice.Navigation
 {
@@ -28,11 +29,18 @@ namespace PageObjectLibrary.Steps.AutomationPractice.Navigation
             return loginPage;
         }
 
-        public DressesPage NavigateToDresses()
+        public DressesPage NavigateToDressesPage()
         {
             ProductsMenuPage productsMenuPage = new ProductsMenuPage();
             DressesPage dressessPage = productsMenuPage.ClickDresses();
             return dressessPage;
+        }
+
+        public WomenPage NavigateToWomenPage()
+        {
+            ProductsMenuPage productsMenuPage = new ProductsMenuPage();
+            WomenPage womenPage = productsMenuPage.ClickWomen();
+            return womenPage;
         }
     }
 }

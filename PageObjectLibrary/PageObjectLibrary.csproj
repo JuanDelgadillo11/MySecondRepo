@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\UserTest.cs" />
     <Compile Include="Base\BaseDriver.cs" />
     <Compile Include="Base\BaseStep.cs" />
     <Compile Include="Base\BasePage.cs" />
@@ -66,9 +67,11 @@
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartPayment\ShoppingCartPaymentPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartShipping\ShoppingCartShippingPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartSummary\ShoppingCartSummaryPage.cs" />
+    <Compile Include="PageObjects\AutomationPractice\Women\WomenPage.cs" />
     <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\AutomationPractice\Navigation\NavigationSteps.cs" />
+    <Compile Include="Steps\AutomationPractice\Purchase\PurchaseADress.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
