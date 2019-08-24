@@ -1,27 +1,17 @@
 ﻿using OpenQA.Selenium;
+using PageObjectLibrary.Base;
 using PageObjectLibrary.PageObjects.AutomationPractice.Dresses;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PageObjectLibrary.PageObjects.AutomationPractice.ProductsMenu
 {
-    public class ProductsMenuPage
+    public class ProductsMenuPage : BasePage
     {
-        IWebDriver webDriver;
-
-        public ProductsMenuPage(IWebDriver web)
-        {
-            this.webDriver = web;
-        }
+        private IWebElement dressesButton = GetDriver().FindElement(By.ClassName("sf-with-ul"));
 
         public DressesPage ClickDresses()
-        {
-            IWebElement dressesButton = webDriver.FindElement(By.ClassName("sf-with-ul"));
+        {            
             dressesButton.Click();
-            DressesPage dressesPage = new DressesPage(webDriver);
+            DressesPage dressesPage = new DressesPage();
             return dressesPage;
         }
     }

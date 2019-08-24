@@ -1,49 +1,38 @@
-﻿using OpenQA.Selenium;
-using PageObjectLibrary.AutomationPractice.ContactUs;
+﻿using PageObjectLibrary.AutomationPractice.ContactUs;
 using PageObjectLibrary.AutomationPractice.Menu;
+using PageObjectLibrary.Base;
 using PageObjectLibrary.PageObjects.AutomationPractice.Dresses;
 using PageObjectLibrary.PageObjects.AutomationPractice.LogIn;
 using PageObjectLibrary.PageObjects.AutomationPractice.ProductsMenu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PageObjectLibrary.Steps.AutomationPractice.Navigation
 {
-    public class NavigationSteps
+    public class NavigationSteps :BaseStep
     {
-        IWebDriver webDriver;
-
-        public NavigationSteps(IWebDriver webDriver)
+        public NavigationSteps()
         {
-            this.webDriver = webDriver;
+            NavigateToInitialSite();
         }
 
         public ContactUsPage NavigateToContactUs()
         {    
-            MenuPage menuPage = new MenuPage(webDriver);
+            MenuPage menuPage = new MenuPage();
             ContactUsPage contactUsPage = menuPage.ClickContactUs();
             return contactUsPage;
-
         }
 
         public LogInPage NavigateToLogIn()
         {
-            MenuPage menuPage = new MenuPage(webDriver);
+            MenuPage menuPage = new MenuPage();
             LogInPage loginPage = menuPage.ClickLogin();
             return loginPage;
-
         }
 
         public DressesPage NavigateToDresses()
         {
-            ProductsMenuPage productsMenuPage = new ProductsMenuPage(webDriver);
+            ProductsMenuPage productsMenuPage = new ProductsMenuPage();
             DressesPage dressessPage = productsMenuPage.ClickDresses();
             return dressessPage;
-
         }
-
     }
 }

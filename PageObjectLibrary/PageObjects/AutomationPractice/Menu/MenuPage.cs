@@ -1,36 +1,26 @@
 ﻿using OpenQA.Selenium;
 using PageObjectLibrary.AutomationPractice.ContactUs;
+using PageObjectLibrary.Base;
 using PageObjectLibrary.PageObjects.AutomationPractice.LogIn;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PageObjectLibrary.AutomationPractice.Menu
 {
-    public class MenuPage
+    public class MenuPage: BasePage
     {
-        IWebDriver webDriver;
-
-        public MenuPage(IWebDriver web)
-        {
-            this.webDriver = web;
-        }
+        private IWebElement contactUsButton = GetDriver().FindElement(By.Id("contact-link"));
+        private IWebElement loginButton = GetDriver().FindElement(By.ClassName("login"));
 
         public ContactUsPage ClickContactUs()
-        {
-            IWebElement contactUsButton = webDriver.FindElement(By.Id("contact-link"));
+        {            
             contactUsButton.Click();
-            ContactUsPage contactUsPage = new ContactUsPage(webDriver);
+            ContactUsPage contactUsPage = new ContactUsPage();
             return contactUsPage;
         }
 
         public LogInPage ClickLogin()
-        {
-            IWebElement loginButton = webDriver.FindElement(By.ClassName("login"));
+        {            
             loginButton.Click();
-            LogInPage loginPage = new LogInPage(webDriver);
+            LogInPage loginPage = new LogInPage();
             return loginPage;
         }
 

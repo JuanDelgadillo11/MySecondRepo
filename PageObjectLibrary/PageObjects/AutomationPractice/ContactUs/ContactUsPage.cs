@@ -1,21 +1,19 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PageObjectLibrary.Base;
 
 namespace PageObjectLibrary.AutomationPractice.ContactUs
 {
-    public class ContactUsPage
+    public class ContactUsPage:BasePage
     {
-        IWebDriver webDriver;
-
-        public ContactUsPage(IWebDriver web)
-        {
-            this.webDriver = web;
-        }
+        #region web controls
+        private IWebElement subjectHeading = GetDriver().FindElement(By.Id("id_contact"));
+        private IWebElement emailAddress = GetDriver().FindElement(By.Name("from"));
+        private IWebElement orderReferenceInput = GetDriver().FindElement(By.Name("id_order"));
+        private IWebElement attachFile = GetDriver().FindElement(By.Id("fileUpload"));
+        private IWebElement messageInput = GetDriver().FindElement(By.Id("message"));
+        private IWebElement sendButton = GetDriver().FindElement(By.Id("submitMessage"));       
+        #endregion
 
         public enum Options
         {
@@ -26,7 +24,6 @@ namespace PageObjectLibrary.AutomationPractice.ContactUs
 
         public void SelectHeadingComboBox(Options option, string value)
         {
-            IWebElement subjectHeading = webDriver.FindElement(By.Id("id_contact"));
             SelectElement subjectHeadingComboBox = new SelectElement(subjectHeading);
             switch (option)
             {
@@ -45,36 +42,26 @@ namespace PageObjectLibrary.AutomationPractice.ContactUs
 
         public void SetEmailAddress(string email)
         {
-            //capture email address input
-            IWebElement emailAddress = webDriver.FindElement(By.Name("from"));
             emailAddress.SendKeys(email);
         }
 
         public void SetOrderReference(string orderReference)
-        {
-            //id_order
-            IWebElement orderReferenceInput = webDriver.FindElement(By.Name("id_order"));
+        {              
             orderReferenceInput.SendKeys(orderReference);
         }
 
         public void SetAttachFile(string filePath)
-        {
-            //C:\
-            IWebElement attachFile = webDriver.FindElement(By.Id("fileUpload"));
+        {            
             attachFile.SendKeys(filePath);
         }
 
         public void SetMessage(string message)
-        {
-            //message
-            IWebElement messageInput = webDriver.FindElement(By.Id("message"));
+        {            
             messageInput.SendKeys(message);
         }
 
         public void ClickSend()
-        {
-            //submitMessage
-            IWebElement sendButton = webDriver.FindElement(By.Id("submitMessage"));
+        {            
             sendButton.Click();
         }
         
@@ -86,29 +73,6 @@ namespace PageObjectLibrary.AutomationPractice.ContactUs
             SetAttachFile(filePath);
             SetMessage(message);
             ClickSend();
-
         }
-
-        public string GetConfirmationMessage()
-        {
-            IWebElement confirmationLabel = webDriver.FindElement(By.XPath("//p[@class='alert alert-success']"));
-            string message = confirmationLabel.Text;
-            return message;
-        }
-
-        //string expectedMessage = "Your message has been successfully sent to our team.";
-
-        //Assert.AreEqual(expectedMessage, actualMesssage);
-
-
-
-
-        //    ////p[@class='alert alert-success'] Your message has been successfully sent to our team.
-
-        //    IWebElement confirmationLabel = webDriver.FindElement(By.XPath("//p[@class='alert alert-success']"));
-        //string actualMesssage = confirmationLabel.Text;
-        //string expectedMessage = "Your message has been successfully sent to our team.";
-
-        //Assert.AreEqual(expectedMessage, actualMesssage);
     }
 }

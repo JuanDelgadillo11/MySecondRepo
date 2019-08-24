@@ -1,38 +1,26 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PageObjectLibrary.Base;
 
 namespace PageObjectLibrary.PageObjects.AutomationPractice.LogIn
 {
-    public class LogInPage
+    public class LogInPage : BasePage
     {
-        IWebDriver webDriver;
-
-        public LogInPage(IWebDriver web)
-        {
-            this.webDriver = web;
-        }
+        private IWebElement emailAddress = GetDriver().FindElement(By.Id("email"));
+        private IWebElement passwordAccount = GetDriver().FindElement(By.Id("passwd"));
+        private IWebElement signinButton = GetDriver().FindElement(By.Id("SubmitLogin"));
 
         public void SetEmailAddress(string email)
-        {
-            IWebElement emailAddress = webDriver.FindElement(By.Id("email"));
+        {            
             emailAddress.SendKeys(email);
         }
 
         public void SetPassword(string password)
-        {
-            IWebElement passwordAccount = webDriver.FindElement(By.Id("passwd"));
+        {            
             passwordAccount.SendKeys(password);
         }
 
         public void ClickSignIn()
-        {
-            //submitMessage
-            IWebElement signinButton = webDriver.FindElement(By.Id("SubmitLogin"));
-                                       
+        {                                      
             signinButton.Click();
         }
         public void FillAccountData(string email, string password)

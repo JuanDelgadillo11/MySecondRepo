@@ -1,48 +1,48 @@
 ﻿using OpenQA.Selenium;
+using PageObjectLibrary.Base;
 using PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartAddress;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PageObjectLibrary.PageObjects.AutomationPractice.ShoppingCartSummary
 {
-    public class ShoppingCartSummaryPage
-    {
-        IWebDriver webDriver;
-
-        public ShoppingCartSummaryPage(IWebDriver web)
-        {
-            this.webDriver = web;
-        }
+    public class ShoppingCartSummaryPage : BasePage
+    {        
+        private IWebElement unitPrice = GetDriver().FindElement(By.XPath("//span[@class='price']/span[@class='price']"));       
+        private IWebElement qty = GetDriver().FindElement(By.XPath("//input[@class='cart_quantity_input form-control grey']"));
+        private IWebElement total = GetDriver().FindElement(By.Id("total_price"));        
+        private IWebElement addElement = GetDriver().FindElement(By.XPath("//a[@class='cart_quantity_up btn btn-default button-plus']"));
+        private IWebElement proceedToCheckOutButton = GetDriver().FindElement(By.XPath("//a[@class='button btn btn-default standard-checkout button-medium']"));        
 
         public string GetUnitPrice()
-        {
-            IWebElement unitPrice = webDriver.FindElement(By.XPath("//p[@class='alert alert-success']"));
+        {            
             string message = unitPrice.Text;
             return message;
         }
 
         public string GetQty()
-        {
-            IWebElement qty = webDriver.FindElement(By.XPath("//p[@class='alert alert-success']"));
+        {            
             string message = qty.Text;
             return message;
         }
 
         public string GetTotal()
-        {
-            IWebElement total = webDriver.FindElement(By.Id("total_price"));
+        {            
             string message = total.Text;
             return message;
         }
 
+        public void AddQty(int ammount)
+        {            
+            for (int i = 0; i < ammount; i++)
+            {
+                addElement.Click();
+            }
+            
+        }
+
         public ShoppingCartAddressPage ProceedToCheckOut()
-        {
-            IWebElement proceedToCheckOutButton = webDriver.FindElement(By.XPath("//*[@id='center_column']/p[2]/a[1]/span"));
+        {            
             proceedToCheckOutButton.Click();
-            ShoppingCartAddressPage shoppingCartAddressPage = new ShoppingCartAddressPage(webDriver);
+            ShoppingCartAddressPage shoppingCartAddressPage = new ShoppingCartAddressPage();
             return shoppingCartAddressPage;
         }
     }

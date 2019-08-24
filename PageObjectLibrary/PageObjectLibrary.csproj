@@ -51,22 +51,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseDriver.cs" />
+    <Compile Include="Base\BaseStep.cs" />
+    <Compile Include="Base\BasePage.cs" />
+    <Compile Include="Initializer\Init.cs" />
+    <Compile Include="PageObjects\AutomationPractice\ConfirmOrder\Confirm.cs" />
     <Compile Include="PageObjects\AutomationPractice\ContactUs\ContactUsPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\Dresses\DressesPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\LogIn\LogInPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\Menu\MenuPage.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="PageObjects\AutomationPractice\OrderSummary\Order.cs" />
     <Compile Include="PageObjects\AutomationPractice\ProductsMenu\ProductsMenuPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartAddress\ShoppingCartAddressPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartPayment\ShoppingCartPaymentPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartShipping\ShoppingCartShippingPage.cs" />
     <Compile Include="PageObjects\AutomationPractice\ShoppingCartSummary\ShoppingCartSummaryPage.cs" />
+    <Compile Include="PageObjects\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\AutomationPractice\Navigation\NavigationSteps.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Steps\AutomationPractice\ContactUs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
